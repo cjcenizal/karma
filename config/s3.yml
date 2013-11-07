@@ -1,0 +1,36 @@
+access_key_id: AKIAIRCU7CT3OLN25JLA 
+secret_access_key: P90wBUJ2ybxfuRyxmM88NgOMBDjyjdBGH2lEEa/i
+
+
+
+#   * WARNING: your RVM loading script `/etc/profile.d/rvm.sh` is deprecated
+#     and causes you to have `umask g+w` set in your shell,
+#     run `rvm get head --auto-dotfiles` again to fix your scripts.
+
+
+#   * WARNING: You are using apt-get broken RVM, you should now:
+
+#       sudo apt-get --purge remove ruby-rvm
+# m -rf /usr/share/ruby-rvm /etc/rvmrc /etc/profile.d/rvm.sh
+
+#     open new terminal and validate environment is clean from old rvm settings:
+
+#       env | GREP_OPTIONS= \grep rvm
+
+#     install RVM:
+
+#       curl -L https://get.rvm.io | bash -s stable --autolibs=enable
+
+#     for details check:
+
+#       http://stackoverflow.com/a/9056395/497756
+
+
+#   * Please do NOT forget to add your users to the 'rvm' group.
+#     The installer no longer auto-adds root or users to the rvm group. Admins must do this.
+#     Also, please note that group memberships are ONLY evaluated at login time.
+#     This means that users must log out then back in before group membership takes effect!
+
+#   * If you wish to disable the project .rvmrc file functionality, set
+#     rvm_project_rvmrc=0 in either /etc/rvmrc or ~/.rvmrc.
+#     then log out and back in.
