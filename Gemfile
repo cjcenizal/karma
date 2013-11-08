@@ -20,7 +20,6 @@ gem 'mongoid_slug'
 gem "jquery-fileupload-rails", :git => "git://github.com/tors/jquery-fileupload-rails.git"
 
 gem 'aws-sdk'
-gem 'rmagick'
 
 gem 'twitter'
 
