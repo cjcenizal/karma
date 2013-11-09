@@ -2,20 +2,3 @@
 
 
 
-
-
-
-<%= gmaps4rails(@shouts_json) %>
-
-<% count = 1 %>
-<% @vendors.each do |vendor| %>
-
-<%= count %> 
-<%= vendor.content %>  <%= vendor.geoloc[0] %>, <%= vendor.geoloc[1] %><br/>
-<% count += 1 %>
-<% end %>
-
-<% @tweets.map do |status| %>
-<%= "#{status.from_user}: #{status.text}" %><br/>
-<% end %>
-
