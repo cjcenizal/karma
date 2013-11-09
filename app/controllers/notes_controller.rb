@@ -42,7 +42,7 @@ class NotesController < ApplicationController
   def create
     @notecollection = Notecollection.new()
     @note = Note.new(params[:note].merge({:notecollection_id => @notecollection._id}))
-
+    @notecollection.notes_list[0] = @note._id.to_s
     @note.user_giver = current_user
 
     case params[:note][:find_type]
@@ -121,13 +121,22 @@ class NotesController < ApplicationController
     end
   end
 
+  def pass_new
+    @notecollection = params[:collection_id]
+    @note = Note.new
 
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @note }
+    end
+  end
 
   def pass
-    @notecollection = params[:collection_id]
-    
-    @note = Note.new(params[:note].merge({:notecollection_id => @notecollection}))
-
+    @notecollection_id = params[:collection_id]    
+    @note = Note.new(params[:note].merge({:notecollection_id => @notecollection_id}))
+    @notecollection = Notecollection.find(@notecollection_id)
+    @notecollection.notes_list << @note._id.to_s
+    @notecollection.save
     @note.user_giver = current_user
 
     case params[:note][:find_type]
@@ -175,16 +184,5 @@ class NotesController < ApplicationController
       end
     end
   end
-
-  def pass_new
-    @notecollection = params[:collection_id]
-    @note = Note.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @note }
-    end
-  end
-
 
 end

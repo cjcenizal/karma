@@ -10,6 +10,8 @@ class UsersController < ApplicationController
     end
   end
 
+
+
   # GET /users/1
   # GET /users/1.json
   def show
@@ -45,9 +47,7 @@ class UsersController < ApplicationController
     @user = Virtualuser.where(email: params[:user][:email]).or(phone_number: params[:user][:email]).first
     logger.info(@user.to_a)
 
-
     
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }

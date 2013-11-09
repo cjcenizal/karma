@@ -36,15 +36,18 @@ class Note
 
   acts_as_gmappable :position => :geoloc, :process_geocoding => false
     
+
+  # properties
+
   field :content,                 :type => String, :default => ""
 
-  field :private_name_giver,      :type => Boolean, :default => false
-  field :private_content_giver,   :type => Boolean, :default => false
-  field :private_picture_giver,   :type => Boolean, :default => false
+  field :is_private_name_giver,      :type => Boolean, :default => false
+  field :is_private_content_giver,   :type => Boolean, :default => false
+  field :is_private_picture_giver,   :type => Boolean, :default => false
 
-  field :private_name_receiver,    :type => Boolean, :default => false
-  field :private_content_receiver,   :type => Boolean, :default => false
-  field :private_picture_receiver,   :type => Boolean, :default => false
+  field :is_private_name_receiver,    :type => Boolean, :default => false
+  field :is_private_content_receiver,   :type => Boolean, :default => false
+  field :is_private_picture_receiver,   :type => Boolean, :default => false
 
   field :expiration,                :type => Integer, :default => 1209600 # 2 weeks in seconds
   
@@ -65,11 +68,9 @@ class Note
   # field :expiration_time, :type => Time, :default => Time.now +1.day
 
   def gmaps4rails_address
-#describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
-  # "#{self.street}, #{self.city}, #{self.country}" 
-end
-
-
+    #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
+    # "#{self.street}, #{self.city}, #{self.country}" 
+  end
 
   def reverse_geoloc
     self.geoloc_rev = self.geoloc.reverse
@@ -81,54 +82,39 @@ end
 
     query = factual.table("places").limit(1).geo("$point" => self.geoloc)
   
-
-    
     logger.info(query.to_a)
   end
 
-index({geoloc: "2d"})
+  index({geoloc: "2d"})
 
-IMAGE_SIZES = { :small => "150x150>" ,
-      :preview => "200x200>",
-      :large => "250x250>",
-      :xlarge => "400x400>"}    
-  
-  has_mongoid_attached_file :picture, :styles => IMAGE_SIZES,
-    :storage => :s3,
-    :s3_credentials => "#{Rails.root}/config/s3.yml",
-    :path => ":class/:id/:style.:extension",
-    :bucket => "picture_#{Rails.env}"
+  IMAGE_SIZES = { :small => "150x150>" ,
+        :preview => "200x200>",
+        :large => "250x250>",
+        :xlarge => "400x400>"}    
     
-  
-  validates_attachment_size :picture, :less_than => 10.megabytes
-  validates_attachment_content_type :picture, :content_type => ['image/gif', 'image/png', 'image/x-png', 'image/jpeg', 'image/pjpeg', 'image/jpg']  
-
-
-
-  # def shout_pic_url (size)
-  #   if shout_pic.present?
-  #     return shout_pic.url(size)
-  #   # elsif provider == "facebook" and external_uid
-  #   #   return "https://graph.facebook.com/#{external_uid}/picture"
-  #   else
-  #     return nil
-  #   end
-  # end
-  def check_receiver
-    read_attribute(:user_receiver).presence || ""
-  end
-
-
-
-
-  def extract_hashtags
+    has_mongoid_attached_file :picture, :styles => IMAGE_SIZES,
+      :storage => :s3,
+      :s3_credentials => "#{Rails.root}/config/s3.yml",
+      :path => ":class/:id/:style.:extension",
+      :bucket => "picture_#{Rails.env}"
+      
     
-    hashtag_regex = /\#\w\w+/
-    hashtags = self.content.scan(hashtag_regex)
-    hashtags.each do |hashtag|
-      self.tags << Tag.new(:name => hashtag)
+    validates_attachment_size :picture, :less_than => 10.megabytes
+    validates_attachment_content_type :picture, :content_type => ['image/gif', 'image/png', 'image/x-png', 'image/jpeg', 'image/pjpeg', 'image/jpg']  
+
+
+    def check_receiver
+      read_attribute(:user_receiver).presence || ""
     end
-  end
+
+    def extract_hashtags
+      
+      hashtag_regex = /\#\w\w+/
+      hashtags = self.content.scan(hashtag_regex)
+      hashtags.each do |hashtag|
+        self.tags << Tag.new(:name => hashtag)
+      end
+    end
 
 
 end
