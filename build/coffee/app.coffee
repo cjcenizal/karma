@@ -30,5 +30,8 @@ TF.controller "HomeController", [
       COLORS.BLUE
     ]
 
+    $scope.goToNote = (noteId) ->
+      console.log noteId
+
 ]
 
