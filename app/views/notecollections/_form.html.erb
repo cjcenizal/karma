@@ -1,0 +1,17 @@
+<%= form_for(@notecollection) do |f| %>
+  <% if @notecollection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notecollection.errors.count, "error") %> prohibited this notecollection from being saved:</h2>
+
+      <ul>
+      <% @notecollection.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

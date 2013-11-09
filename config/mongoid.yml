@@ -5,11 +5,11 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: shoutapp_development
+      database: karma_development
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - localhost:27017
+        - dev-machine.com:27017
       options:
         # Change whether the session persists in safe mode by default.
         # (default: false)
@@ -69,7 +69,7 @@ development:
 test:
   sessions:
     default:
-      database: shoutapp_test
+      database: karma_test
       hosts:
         - localhost:27017
       options:
@@ -82,7 +82,7 @@ test:
 production:
   sessions:
     default:
-      database: shoutapp_production
+      database: karma_production
       hosts: 
         - localhost:27017
       options:

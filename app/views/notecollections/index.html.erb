@@ -1,0 +1,21 @@
+<h1>Listing notecollections</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @notecollections.each do |notecollection| %>
+  <tr>
+    <td><%= link_to 'Show', notecollection %></td>
+    <td><%= link_to 'Edit', edit_notecollection_path(notecollection) %></td>
+    <td><%= link_to 'Destroy', notecollection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Notecollection', new_notecollection_path %>
