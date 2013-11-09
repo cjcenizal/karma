@@ -23,7 +23,7 @@ class Note
   before_validation :reverse_geoloc #, :factual_check
   after_validation :reverse_geocode  # auto-fetch address
 
-  before_create :extract_hashtags
+  before_save :extract_hashtags
   
 
   belongs_to :notecollection
