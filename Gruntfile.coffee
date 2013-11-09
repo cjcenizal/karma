@@ -97,7 +97,7 @@ module.exports = (grunt) ->
           interrupt: true
       css:
         files: '**/*.sass',
-        tasks: ["copy", "compass:debug"]
+        tasks: ["compass:debug"]
         options:
           interrupt: true
       jade:
