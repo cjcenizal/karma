@@ -32,6 +32,8 @@ Karma::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.assets.compile = true
+  # Turn off the default Rails+Sprockets asset pipeline.
+  # Requires external asset management (e.g. Grunt).
+  config.assets.enabled = false
 
 end
