@@ -25,6 +25,7 @@ gem 'twitter'
 
 gem 'geocoder'
 gem 'factual-api'
+gem 'twilio-ruby'
 
 group :development do
   gem 'better_errors'

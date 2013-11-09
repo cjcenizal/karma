@@ -14,6 +14,7 @@ Karma::Application.routes.draw do
 
   root :to => "home#index"
   match 'home', :to => "home#index"
+  match 'map', :to => "home#map"
   match 'seed', :to => "shouts#seed"
   match 'privacy', :to => "home#privacy"
   match 'logs/development', :to => "logs#development"

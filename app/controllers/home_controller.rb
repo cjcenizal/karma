@@ -19,6 +19,24 @@ class HomeController < ApplicationController
 
   end
 
+  def map
+    @notes = Note.all
+    @notes = @notes.to_gmaps4rails do |note, marker|
+       marker.infowindow render_to_string(:partial => "/notes/infowindow", :locals => { :note => note})
+        marker.title "example"
+        marker.json({ :content => note.geoloc})
+        # marker.picture({:picture => "http://mapicons.nicolasmollet.com/     wp-content/uploads/mapicons/shape-default/color-3875d7/shapeco     lor-color/shadow-1/border-dark/symbolstyle-contrast/symbolshad     owstyle-dark/gradient-iphone/information.png",
+        #                 :width => 32,
+        #                 :height => 32})
+    end
+    respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @notes }
+    end
+ end
+
+
+  
   
   def tag_search
     @notes = Note.full_text_search(params[:hashtag]).order_by(:created_at => :desc)

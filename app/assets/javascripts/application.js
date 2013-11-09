@@ -10,3 +10,8 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require gmaps4rails/gmaps4rails.base.js.coffee
+//= require gmaps4rails/gmaps4rails.bing.js.coffee
+//= require gmaps4rails/gmaps4rails.googlemaps.js.coffee
+//= require gmaps4rails/gmaps4rails.mapquest.js.coffee
+//= require gmaps4rails/gmaps4rails.openlayers.js.coffee
