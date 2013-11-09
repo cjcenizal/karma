@@ -23992,7 +23992,7 @@ angular.element(document).find('head').append('<style type="text/css">@charset "
   window.TF = TF = angular.module("TF", []);
 
   TF.controller("HomeController", [
-    "$http", "$scope", function($http, $scope) {
+    "$http", "$scope", "$location", "$window", function($http, $scope, $location, $window) {
       var COLORS;
       COLORS = {
         PURPLE: "#8857f9",
@@ -24005,7 +24005,10 @@ angular.element(document).find('head').append('<style type="text/css">@charset "
         CYAN: "#45cdf9",
         BLUE: "#448df9"
       };
-      return $scope.colors = [COLORS.PURPLE, COLORS.VIOLET, COLORS.MAGENTA, COLORS.ORANGE, COLORS.GOLD, COLORS.GREEN, COLORS.TEAL, COLORS.CYAN, COLORS.BLUE];
+      $scope.colors = [COLORS.PURPLE, COLORS.VIOLET, COLORS.MAGENTA, COLORS.ORANGE, COLORS.GOLD, COLORS.GREEN, COLORS.TEAL, COLORS.CYAN, COLORS.BLUE];
+      return $scope.goToNote = function(noteId) {
+        return $window.location = "/notes/" + noteId;
+      };
     }
   ]);
 

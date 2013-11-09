@@ -5,7 +5,14 @@ window.TF = TF = angular.module "TF", []
 TF.controller "HomeController", [
   "$http"
   "$scope"
-  ($http, $scope) ->
+  "$location"
+  "$window"
+  (
+    $http
+    $scope
+    $location
+    $window
+  ) ->
 
     COLORS =
       PURPLE:  "#8857f9"
@@ -29,6 +36,9 @@ TF.controller "HomeController", [
       COLORS.CYAN,
       COLORS.BLUE
     ]
+
+    $scope.goToNote = (noteId) ->\
+      $window.location = "/notes/#{noteId}"
 
 ]
 

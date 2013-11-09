@@ -3,17 +3,9 @@ require 'sentence'
 class HomeController < ApplicationController
   def index
 
-
-    @test_notes = []
-    for i in 0..40
-      thanks_in = "Thanks!"
-      thanks_out = "No, thank YOU!"
-      count = Random.rand(9)
-      @test_notes.push(Struct.new(:thanks_in,:thanks_out,:count).new(thanks_in,thanks_out,count))
-    end
-      respond_to do |format|
+    @notes = current_user.note_receiveds.desc(:time_created)
+    respond_to do |format|
       format.html # new.html.erb
-      
     end
 
   end

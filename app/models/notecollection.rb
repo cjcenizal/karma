@@ -9,7 +9,9 @@ class Notecollection
 
   field :notes_list,			:type => Array, :default => []
 
-
+  def notes_count
+    self.notes.count
+  end
 
 
 end
