@@ -1,0 +1,68 @@
+
+// Mixins.
+
+@mixin clearfix()
+  &:after
+    content: ""
+    display: table
+    clear:   both
+
+// Global.
+
+*
+  box-sizing: border-box
+
+html, body
+  font-family: 'Muli', sans-serif
+  background-color: #383a42
+  margin: 0
+  padding: 0
+
+// Type.
+
+p, h1, h2, h3, h4, h5, h6 
+  margin-top: 0
+  margin-bottom: 16px
+
+p
+  font-size: 14px
+
+h2 
+  font-size: 16px
+
+// Header.
+
+$headerHeight: 50px
+
+.header 
+  @include clearfix()
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  height: $headerHeight
+  background-color: #25272c
+
+.header__text 
+  color: #616472
+  font-size: 16px
+
+// Home.
+
+.home__column,
+.row__column
+  float:   left
+  width:   50%
+  padding: 16px
+
+.home__notes-list
+  position: fixed
+  top: $headerHeight
+  bottom: 0
+  left: 0
+  right: 0
+  overflow-y: scroll
+
+.home__notes-list__row
+  @include clearfix()
+  color: #a6abb1

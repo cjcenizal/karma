@@ -1,4 +1,27 @@
+<div class="header">
+  
+  <div class="home__column">
+    <h2 class="header__text">THANK YOU</h2>
+  </div>
 
+  <div class="home__column">
+    <h2 class="header__text">...AND ONWARD</h2>
+  </div>
 
+</div>
 
+<div class="home__notes-list">
+<% @test_notes.each do |test| %>
+  <div class="home__notes-list__row">
 
+    <div class="row__column">
+      <p><%= test.thanks_in %><%= test.count %></p>
+    </div>
+
+    <div class="row__column">
+      <p><%= test.thanks_out %></p>
+    </div>
+
+  </div>
+<% end %>
+</div>
