@@ -61,7 +61,7 @@ class Note
   field :gmaps,                   :type => Boolean
 
   attr_accessor :email, :phone_number, :displayname, :user_code, :find_type
-  
+
   # field :expiration_time, :type => Time, :default => Time.now +1.day
 
   def gmaps4rails_address

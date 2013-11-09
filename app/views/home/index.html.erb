@@ -12,16 +12,23 @@
   </div>
 
   <div class="home__notes-list">
-  <% @test_notes.each do |test| %>
+  <% @notes.each do |note| %>
     <div class="home__notes-list__row">
 
-      <div class="row__column">
-        <span class="home__notes-list__row__color" style="background-color:{{colors[<%= test.count %>]}}"></span>
-        <p class="home__notes-list__row__thanks-in"><%= test.thanks_in %><%= test.count %></p>
+      <div
+        class="home__notes-list__row__column--thanks-in"
+        ng-click="goToNote('<%= note._id %>')"
+      >
+        <span class="home__notes-list__row__color" style="background-color:{{colors[<%= note.notecollection.notes_count %>]}}"></span>
+        <p class="home__notes-list__row__thanks-in"><%= note.content %>
       </div>
 
-      <div class="row__column">
-        <p class="home__notes-list__row__thanks-out"><%= test.thanks_out %></p>
+      <div
+        class="home__notes-list__row__column--thanks-out"
+        ng-click="goToNote('<%= note._id %>')"
+      >
+        <span class="home__notes-list__row__color"></span>
+        <p class="home__notes-list__row__thanks-out"><%= note.content %></p>
       </div>
 
     </div>

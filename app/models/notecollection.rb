@@ -6,6 +6,8 @@ class Notecollection
 
   has_many :notes
 
-
+  def notes_count
+    self.notes.count
+  end
 
 end

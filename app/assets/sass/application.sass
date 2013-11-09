@@ -49,11 +49,6 @@ $headerHeight: 50px
 
 // Home.
 
-.row__column
-  float:   left
-  width:   50%
-  //padding: 16px
-
 .home__column
   float:   left
   width:   50%
@@ -70,14 +65,27 @@ $headerHeight: 50px
 .home__notes-list__row
   @include clearfix()
   color: #a6abb1
+  border-bottom: 1px solid #2e3037
   &:hover
     background-color: #454852
+
+.home__notes-list__row__column
+  float:  left
+  width:  50%
+  height: 40px
+
+.home__notes-list__row__column--thanks-in,
+.home__notes-list__row__column--thanks-out
+  @extend .home__notes-list__row__column
+  cursor: pointer
+  &:hover
+    background-color: rgba(white, .05)
 
 .home__notes-list__row__color
   display: inline-block
   vertical-align: middle
-  width: 5px
-  height: 30px
+  width: 8px
+  height: 100%
 
 .home__notes-list__row__thanks-in,
 .home__notes-list__row__thanks-out
