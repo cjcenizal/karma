@@ -42,7 +42,11 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    @user = Virtualuser.where(email: params[:user][:email]).or(phone_number: params[:user][:email]).first
+    logger.info(@user.to_a)
+
+
+    
 
     respond_to do |format|
       if @user.save

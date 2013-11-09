@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <%= @note.user_giver.displayname %> <%= @note.user_receiver.displayname unless @note.user_receiver.nil? %> <%= @note.content %><br/>
-<%= @note.notecollection_id %>
+<%= link_to @note.notecollection._id, :controller => "/notecollections", :action => "show", :id => @note.notecollection._id unless @note.notecollection %> 
 
 <%= link_to 'Edit', edit_note_path(@note) %> |
 <%= link_to 'Back', notes_path %>

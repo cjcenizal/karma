@@ -26,6 +26,10 @@ class User
   field :first_name,                :type => String, :default => ""
   field :last_name,                 :type => String, :default => ""
   field :phone_number,              :type => String, :default => ""
+
+  field :give_count,                :type => Integer, :default => 0
+  field :receive_count,             :type => Integer, :default => 0
+
   
   ## Recoverable
   field :reset_password_token,   :type => String

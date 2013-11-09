@@ -52,8 +52,13 @@ class NotesController < ApplicationController
       unless user
         user = Virtualuser.where(email: params[:note][:email]).first_or_initialize
         @note.add_to_set(:virtualuser_ids, user._id)
+        user.receive_count += 1
+        user.save
       end
+      
       @note.user_receiver = user
+      user.receive_count += 1
+      user.save
 
     when "phone_number"
       
@@ -62,15 +67,23 @@ class NotesController < ApplicationController
       unless user
         user = Virtualuser.where(phone_number: params[:phone_number]).first_or_initialize
         @note.add_to_set(:virtualuser_ids, user._id)
+        user.receive_count += 1
+        user.save
         
       end
+      
       @note.user_receiver = user
+      user.receive_count += 1
+      user.save
     else
     end
 
     respond_to do |format|
       if @note.save
         @notecollection.save
+        current_user.give_count += 1
+        current_user.save
+
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render json: @note, status: :created, location: @note }
       else
@@ -112,7 +125,7 @@ class NotesController < ApplicationController
 
   def pass
     @notecollection = params[:collection_id]
-    logger.info("am i even getting there?!")
+    
     @note = Note.new(params[:note].merge({:notecollection_id => @notecollection}))
 
     @note.user_giver = current_user
@@ -124,8 +137,12 @@ class NotesController < ApplicationController
       unless user
         user = Virtualuser.where(email: params[:note][:email]).first_or_initialize
         @note.add_to_set(:virtualuser_ids, user._id)
+        user.receive_count += 1
+        user.save
       end
       @note.user_receiver = user
+      user.receive_count += 1
+      user.save
 
     when "phone_number"
       
@@ -134,14 +151,21 @@ class NotesController < ApplicationController
       unless user
         user = Virtualuser.where(phone_number: params[:phone_number]).first_or_initialize
         @note.add_to_set(:virtualuser_ids, user._id)
+        user.receive_count += 1
+        user.save
         
       end
       @note.user_receiver = user
+      user.receive_count += 1
+      user.save
     else
     end
 
     respond_to do |format|
       if @note.save
+        
+        current_user.give_count += 1
+        current_user.save
         
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render json: @note, status: :created, location: @note }

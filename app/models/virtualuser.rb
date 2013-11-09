@@ -8,5 +8,9 @@ class Virtualuser
   	field :email,				:type => String, :default => ""
   	field :phone_number,		:type => String, :default => ""
 
+  
+  field :receive_count,             :type => Integer, :default => 0
+
+
 end
   

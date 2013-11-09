@@ -12,9 +12,17 @@ class HomeController < ApplicationController
       count = prng.rand
       @test_notes.push(Struct.new(:thanks_in,:thanks_out,:count).new(thanks_in,thanks_out,count))
     end
+      respond_to do |format|
+      format.html # new.html.erb
+      
+    end
+
+  end
 
   
-  
+  def tag_search
+    @notes = Note.full_text_search(params[:hashtag]).order_by(:created_at => :desc)
+
 
   
 
