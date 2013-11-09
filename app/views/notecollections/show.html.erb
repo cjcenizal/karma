@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<% @notes.each do |note| %>
+	<%= note.user_giver.displayname %> gave to <%= note.user_receiver.displayname %> and said <%= note.content %><br/>
+<% end %>
 
 <%= link_to 'Edit', edit_notecollection_path(@notecollection) %> |
 <%= link_to 'Back', notecollections_path %>

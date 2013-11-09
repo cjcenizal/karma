@@ -16,7 +16,8 @@ class User
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable, :omniauthable, :rememberable, :omniauth_providers => [:facebook]
 
 
-  has_and_belongs_to_many :notes
+  has_many :note_receiveds, :class_name => "Note", :inverse_of => :user_receiver
+  has_many :note_givens, :class_name => "Note", :inverse_of => :user_giver 
 
   ## Database authenticatable
   field :email,                     :type => String, :default => ""
@@ -24,6 +25,7 @@ class User
   field :displayname,               :type => String, :default => ""
   field :first_name,                :type => String, :default => ""
   field :last_name,                 :type => String, :default => ""
+  field :phone_number,              :type => String, :default => ""
   
   ## Recoverable
   field :reset_password_token,   :type => String

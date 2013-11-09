@@ -26,10 +26,13 @@ class Note
   before_save :extract_hashtags
   
 
-  belongs_to :notecollection
-  has_and_belongs_to_many :user
-  has_many :tags
-  search_in :tags => :name
+  belongs_to  :notecollection
+  belongs_to  :user_giver, :class_name => "User", :inverse_of => :note_givens#, :foreign_key => "giver_id" 
+  belongs_to  :user_receiver, :class_name => "User", :inverse_of => :note_receiveds#, :foreign_key => "receiver_id"
+  has_and_belongs_to_many   :virtualusers
+
+  has_many    :tags
+  search_in   :tags => :name
 
   acts_as_gmappable :position => :geoloc, :process_geocoding => false
     
@@ -56,6 +59,8 @@ class Note
 
   field :flag,                    :type => String, :default => ""
   field :gmaps,                   :type => Boolean
+
+  attr_accessor :email, :phone_number, :displayname, :user_code, :find_type
   
   # field :expiration_time, :type => Time, :default => Time.now +1.day
 

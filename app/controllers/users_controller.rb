@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @note_givens = @user.note_givens.desc(:time_created)
+    @note_receiveds = @user.note_receiveds.desc(:time_created)
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,5 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+<%= @user.displayname %>  <%= @user.email %><br/>
+
+<% @note_givens.each do |note| %>
+	<%= note.content %>  <%= note.notecollection._id %> 
+	<%= link_to 'Collection', :controller => "/notecollections", :action => "show", :id => note.notecollection._id %>
+	
+	<br/>
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

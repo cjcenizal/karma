@@ -14,6 +14,7 @@ class NotecollectionsController < ApplicationController
   # GET /notecollections/1.json
   def show
     @notecollection = Notecollection.find(params[:id])
+    @notes = @notecollection.notes.desc(:time_created)
 
     respond_to do |format|
       format.html # show.html.erb

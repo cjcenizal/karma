@@ -41,6 +41,34 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(params[:note])
+    @note.user_giver = current_user
+
+    case params[:note][:find_type]
+    when "email"
+      
+      user = User.where(email: params[:note][:email]).first
+      unless user
+        user = Virtualuser.where(email: params[:note][:email]).first_or_initialize
+        @note.add_to_set(:virtualuser_ids, user._id)
+      end
+      @note.user_receiver = user
+
+    when "phone_number"
+      
+      user = User.where(phone_number: params[:phone_number]).first
+      
+      unless user
+        user = Virtualuser.where(phone_number: params[:phone_number]).first_or_initialize
+        @note.add_to_set(:virtualuser_ids, user._id)
+        
+      end
+      @note.user_receiver = user
+    else
+    end
+
+
+    
+    
 
     respond_to do |format|
       if @note.save
