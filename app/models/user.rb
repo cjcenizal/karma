@@ -69,9 +69,7 @@ class User
   field :private,            :type => Boolean, :default => false
 
   # stats
-  field :shout_count,        :type => Integer, :default => 0
-  field :comment_count,      :type => Integer, :default => 0
-
+  
   # attr_accessible :email, :password, :password_confirmation, :remember_me
   validates_presence_of :email
   validates_uniqueness_of :email, :case_sensitive => false
