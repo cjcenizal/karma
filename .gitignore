@@ -16,3 +16,6 @@
 
 # Ignore installed gems.
 /vendor/bundle
+
+# Fuck you, windows.
+*.DS_Store
