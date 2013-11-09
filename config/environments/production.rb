@@ -1,7 +1,7 @@
 FB_ID="687363184613986"
 FB_SECRET="817b0e317aac9e3346b938eb03de1a9e"
 
-Shoutapp::Application.configure do
+Karma::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests

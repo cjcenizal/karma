@@ -16,15 +16,12 @@ class User
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable, :omniauthable, :rememberable, :omniauth_providers => [:facebook]
 
 
-  has_and_belongs_to_many :badges
-  has_many :shouts
-  has_many :amplifications
-  has_many :friendships, :inverse_of => :follower
+  has_and_belongs_to_many :notes
 
   ## Database authenticatable
   field :email,                     :type => String, :default => ""
   field :encrypted_password,        :type => String, :default => ""
-  field :username,                 :type => String, :default => ""
+  field :displayname,               :type => String, :default => ""
   field :first_name,                :type => String, :default => ""
   field :last_name,                 :type => String, :default => ""
   
@@ -44,10 +41,10 @@ class User
 
   field :admin,   :type => Boolean, :default => true
 
-  field :fb_token,             :type => String
-  field :fb_secret,            :type => String
-  field :fb_uid,         :type => String
-  field :provider,             :type => String, :default => ""
+  # field :fb_token,             :type => String
+  # field :fb_secret,            :type => String
+  # field :fb_uid,         :type => String
+  # field :provider,             :type => String, :default => ""
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -68,7 +65,7 @@ class User
   field :optin,              :type => Boolean, :default => true
   field :aboutme,            :type => String, :default => ""
   field :homepage,           :type => String, :default => ""
-  field :relationship,       :type => String, :default => ""
+  
   field :private,            :type => Boolean, :default => false
 
   # stats
@@ -121,41 +118,38 @@ class User
     [first_name, last_name].join " " 
   end
 
-  def amp_activity
-    self.amplifications.desc(:created_at)
+ 
 
-  end
+  # def self.find_for_facebook_mobile(fb_info, signed_in_resource=nil)
+  #   user = User.where(:fb_uid => fb_info[:fb_uid]).first
+  #   unless user
+  #     user = User.create(  first_name:fb_info[:first_name],
+  #                          last_name:fb_info[:last_name],
+  #                          provider:fb_info[:provider],
+  #                          fb_uid:fb_info[:fb_uid],
+  #                          email:fb_info[:email],
+  #                          password:Devise.friendly_token[0,20],
+  #                          fb_token: fb_info[:token],
+  #                          username: fb_info[:username]
+  #                          )
+  #   end
+  #   user
+  # end
 
-  def self.find_for_facebook_mobile(fb_info, signed_in_resource=nil)
-    user = User.where(:fb_uid => fb_info[:fb_uid]).first
-    unless user
-      user = User.create(  first_name:fb_info[:first_name],
-                           last_name:fb_info[:last_name],
-                           provider:fb_info[:provider],
-                           fb_uid:fb_info[:fb_uid],
-                           email:fb_info[:email],
-                           password:Devise.friendly_token[0,20],
-                           fb_token: fb_info[:token],
-                           username: fb_info[:username]
-                           )
-    end
-    user
-  end
-
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-  user = User.where(:provider => auth.provider, :fb_uid => auth.uid).first
-  unless user
-    user = User.create(  first_name:auth.extra.raw_info.first_name,
-                         last_name:auth.extra.raw_info.last_name,
-                         provider:auth.provider,
-                         fbuid:auth.uid,
-                         email:auth.info.email,
-                         username:auth.info.email,
-                         password:Devise.friendly_token[0,20],
-                         fb_token: auth.credentials.token,
-                         fb_secret: auth.credentials.secret
-                         )
-  end
-  user
-end
+  # def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  #   user = User.where(:provider => auth.provider, :fb_uid => auth.uid).first
+  #   unless user
+  #     user = User.create(  first_name:auth.extra.raw_info.first_name,
+  #                          last_name:auth.extra.raw_info.last_name,
+  #                          provider:auth.provider,
+  #                          fbuid:auth.uid,
+  #                          email:auth.info.email,
+  #                          username:auth.info.email,
+  #                          password:Devise.friendly_token[0,20],
+  #                          fb_token: auth.credentials.token,
+  #                          fb_secret: auth.credentials.secret
+  #                          )
+  #   end
+  #   user
+  # end
 end

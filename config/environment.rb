@@ -2,7 +2,7 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-Shoutapp::Application.initialize!
+Karma::Application.initialize!
 
 Twitter.configure do |config|
   config.consumer_key = "qDdC6EEBTqtcB1bjfKdRw"

@@ -1,9 +1,8 @@
-Shoutapp::Application.routes.draw do
+Karma::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  resources :shouts
-  resources :comments
-  resources :badges
+  resources :notes
+  resources :notecollections
 
   devise_for :users,  :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
 

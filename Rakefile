@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Shoutapp::Application.load_tasks
+Karma::Application.load_tasks
