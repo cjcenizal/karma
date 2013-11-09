@@ -23987,91 +23987,25 @@ var styleDirective = valueFn({
 })(window, document);
 angular.element(document).find('head').append('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none !important;}ng\\:form{display:block;}</style>');
 (function() {
-  var Neon;
+  var TF;
 
-  window.Neon = Neon = angular.module("Neon", []);
+  window.TF = TF = angular.module("TF", []);
 
-  Neon.controller("RootController", [
+  TF.controller("HomeController", [
     "$http", "$scope", function($http, $scope) {
-      var prependPath, retinafy;
-      retinafy = function(path) {
-        var pieces;
-        if (window.devicePixelRatio > 1) {
-          pieces = path.split(".");
-          return pieces.join("_@2X.");
-        }
-        return path;
+      var COLORS;
+      COLORS = {
+        PURPLE: "#8857f9",
+        VIOLET: "#b439b9",
+        MAGENTA: "#f95d7e",
+        ORANGE: "#f97b43",
+        GOLD: "#f9b627",
+        GREEN: "#c0f927",
+        TEAL: "#5ff992",
+        CYAN: "#45cdf9",
+        BLUE: "#448df9"
       };
-      prependPath = function(filename) {
-        return "http://cdn.neon-lab.com/website/carousel/" + filename;
-      };
-      $scope.carouselSlides = [
-        {
-          title: "We explore the digital world through images.",
-          subtitle: "Neon connects images with people.",
-          image: prependPath(retinafy("horses.jpg"))
-        }, {
-          title: "Images influence how we respond to content.",
-          subtitle: "Neon images drive traffic.",
-          image: prependPath(retinafy("fashion.jpg"))
-        }, {
-          title: "Individuals see the world differently.",
-          subtitle: "Neon selects the best image for your target audience.",
-          image: prependPath(retinafy("football.jpg"))
-        }
-      ];
-      $scope.videoDemos = [
-        {
-          name: "Media video",
-          title: "These sample thumbnails were auto-selected from real videos.",
-          subtitle: "Neon for Video works for a wide range of video types.",
-          prompt: "Watch the story of travelers in Malaysia",
-          images: [retinafy("images/video-demos/malaysia-1.jpg"), retinafy("images/video-demos/malaysia-2.jpg"), retinafy("images/video-demos/malaysia-3.jpg")],
-          video: "Malaysia"
-        }, {
-          name: "Product video",
-          title: "A 60-second video contains 1,800 possible thumbnails.",
-          subtitle: "Neon for Video picks for you.",
-          prompt: "Watch the \"LittleBits\" instructional video",
-          images: [retinafy("images/video-demos/littlebits-1.jpg"), retinafy("images/video-demos/littlebits-2.jpg"), retinafy("images/video-demos/littlebits-3.jpg")],
-          video: "LittleBits"
-        }, {
-          name: "Advertisement video",
-          title: "The thumbnail is the gateway to your content.",
-          subtitle: "Capture more video views with better thumbnails.",
-          prompt: "Watch the \"Bluetooth Dice\" ad video",
-          images: [retinafy("images/video-demos/dice-1.jpg"), retinafy("images/video-demos/dice-2.jpg"), retinafy("images/video-demos/dice-3.jpg")],
-          video: "BluetoothDice"
-        }
-      ];
-      $scope.scrollToSignUpForm = function() {
-        var pos;
-        pos = angular.element("#js-signup").offset().top + "px";
-        return angular.element("body, html").animate({
-          scrollTop: pos
-        }, "slow");
-      };
-      $scope.signupFields = {
-        name: null,
-        email: null
-      };
-      $scope.isSubmittingSignup = false;
-      $scope.isSignupSubmissionError = false;
-      $scope.isSignupSubmissionSuccess = false;
-      return $scope.submitSignupForm = function() {
-        $scope.isSubmittingSignup = true;
-        return $http({
-          method: "POST",
-          url: "/prelaunch_signups",
-          data: $scope.signupFields
-        }).success(function(data, status, headers, config) {
-          $scope.isSubmittingSignup = false;
-          return $scope.isSignupSubmissionSuccess = true;
-        }, function(data, status, headers, config) {
-          $scope.isSubmittingSignup = false;
-          return $scope.isSignupSubmissionError = true;
-        });
-      };
+      return $scope.colors = [COLORS.PURPLE, COLORS.VIOLET, COLORS.MAGENTA, COLORS.ORANGE, COLORS.GOLD, COLORS.GREEN, COLORS.TEAL, COLORS.CYAN, COLORS.BLUE];
     }
   ]);
 
