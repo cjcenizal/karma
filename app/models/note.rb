@@ -114,7 +114,9 @@ IMAGE_SIZES = { :small => "150x150>" ,
   #     return nil
   #   end
   # end
-
+  def check_receiver
+    read_attribute(:user_receiver).presence || ""
+  end
 
 
 

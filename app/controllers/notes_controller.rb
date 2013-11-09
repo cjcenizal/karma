@@ -40,7 +40,9 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
-    @note = Note.new(params[:note])
+    @notecollection = Notecollection.new()
+    @note = Note.new(params[:note].merge({:notecollection_id => @notecollection._id}))
+
     @note.user_giver = current_user
 
     case params[:note][:find_type]
@@ -66,12 +68,9 @@ class NotesController < ApplicationController
     else
     end
 
-
-    
-    
-
     respond_to do |format|
       if @note.save
+        @notecollection.save
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render json: @note, status: :created, location: @note }
       else
@@ -108,4 +107,60 @@ class NotesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
+  def pass
+    @notecollection = params[:collection_id]
+    logger.info("am i even getting there?!")
+    @note = Note.new(params[:note].merge({:notecollection_id => @notecollection}))
+
+    @note.user_giver = current_user
+
+    case params[:note][:find_type]
+    when "email"
+      
+      user = User.where(email: params[:note][:email]).first
+      unless user
+        user = Virtualuser.where(email: params[:note][:email]).first_or_initialize
+        @note.add_to_set(:virtualuser_ids, user._id)
+      end
+      @note.user_receiver = user
+
+    when "phone_number"
+      
+      user = User.where(phone_number: params[:phone_number]).first
+      
+      unless user
+        user = Virtualuser.where(phone_number: params[:phone_number]).first_or_initialize
+        @note.add_to_set(:virtualuser_ids, user._id)
+        
+      end
+      @note.user_receiver = user
+    else
+    end
+
+    respond_to do |format|
+      if @note.save
+        
+        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.json { render json: @note, status: :created, location: @note }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @note.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def pass_new
+    @notecollection = params[:collection_id]
+    @note = Note.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @note }
+    end
+  end
+
+
 end

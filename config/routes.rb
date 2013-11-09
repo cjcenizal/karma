@@ -6,38 +6,8 @@ Karma::Application.routes.draw do
 
   devise_for :users,  :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
 
-  namespace :api do
-  namespace :v1 do
-    devise_scope :user do
-      post 'registrations' => 'registrations#create', :as => 'register'
-      post 'sessions' => 'sessions#create', :as => 'login'
-      delete 'sessions' => 'sessions#destroy', :as => 'logout'
-      post 'registrations/facebook' => 'registrations#facebook', :as => 'fb_register'
-      post 'sessions/facebook' => 'sessions#facebook', :as => 'fb_login'
-
-    end
-    get 'shouts/lat/:lat/lon/:lon/rad/:rad/units/:units' => 'shouts#index', :as => 'shouts'
-    get 'shouts/lat/:lat/lon/:lon/rad/:rad' => 'shouts#index', :as => 'shouts_short'
-    get 'shouts/recent'           => 'shouts#recent',         :as => 'shouts_recent'    
-    get 'shouts/:shout_id' => 'shouts#show', :as => 'shouts_info'
-    post 'shouts/new' => 'shouts#create', :as => 'submission'
-    get 'users/:user_id/profile' => 'profile#show', :as => 'profile'
-    post 'users/profile/update' => 'profile#update', :as => 'update_profile'
-    post 'users/profile/upload' => 'profile#upload', :as => 'upload_profile_pic'
-    get 'users/:user_id/shouts' => 'shouts#user_shouts', :as => 'user_shouts'
-    post 'shouts/:shout_id/comment' => 'comments#create', :as => 'comment_create'
-
-    post 'users/:followee_id/follow' => 'friendships#create', :as => 'friendship_create'
-    get 'users/:follower_id/friendships' => 'friendships#retrieve', :as => 'friendships_retrieve'
-    
-    
-    post 'shouts/:shout_id/upload' => 'shouts#upload', :as => 'upload_shout_pic'
-    post 'shouts/:shout_id/amplify/:score' => 'shouts#amplify', :as => 'shout_amplify'
-    get 'shouts/hashtag/:hashtag' => 'shouts#hashtag_search', :as => 'hashtag_search'
-    delete 'shouts/:shout_id'     => 'shouts#destroy',        :as => 'shouts_destroy'
-
-  end
-  end
+  post 'notes/new/collection/:collection_id' => 'notes#pass', :as => 'collection_pass'
+  get 'notes/new/collection/:collection_id' => 'notes#pass_new', :as => 'collection_pass_new'
 
   resources :users
 
