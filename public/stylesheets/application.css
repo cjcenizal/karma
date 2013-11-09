@@ -1,0 +1,33 @@
+/* line 12, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+* { box-sizing: border-box; }
+
+/* line 15, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+html, body { font-family: "Muli", sans-serif; background-color: #383a42; margin: 0; padding: 0; }
+
+/* line 23, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+p, h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 16px; }
+
+/* line 27, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+p { font-size: 14px; }
+
+/* line 30, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+h2 { font-size: 16px; }
+
+/* line 37, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+.header { position: fixed; top: 0; left: 0; right: 0; height: 50px; background-color: #25272c; }
+/* line 5, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+.header:after { content: ""; display: table; clear: both; }
+
+/* line 46, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+.header__text { color: #616472; font-size: 16px; }
+
+/* line 52, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+.home__column, .row__column { float: left; width: 50%; padding: 16px; }
+
+/* line 58, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+.home__notes-list { position: fixed; top: 50px; bottom: 0; left: 0; right: 0; overflow-y: scroll; }
+
+/* line 66, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+.home__notes-list__row { color: #a6abb1; }
+/* line 5, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+.home__notes-list__row:after { content: ""; display: table; clear: both; }
