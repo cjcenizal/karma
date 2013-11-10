@@ -5,9 +5,9 @@ set :application, "karma"
 set :user, "ubuntu"
 
 set :scm, :git
-set :repository, "git@github.com:whitecratedog/shout.git"
+set :repository, "git@github.com:cjcenizal/karma.git"
 set :scm_passphrase, ""
-set :branch, "master"
+set :branch, "cjcrap"
 set :deploy_via, :copy
 
 set :normalize_asset_timestamps, false
