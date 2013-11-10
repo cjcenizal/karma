@@ -1,6 +1,12 @@
 @import "compass"
 @import "compass/css3/user-interface"
 
+// Colors.
+
+$textColor: #a6abb1
+$linkColor: #0894c1
+$subduedTextColor: #767a7e
+
 // Mixins.
 
 @mixin clearfix()
@@ -33,6 +39,17 @@ p
 h2 
   font-size: 16px
 
+a
+  color: $textColor
+  text-decoration: underline
+  &:visited
+    color: $textColor
+  &:active, &:hover
+    color: $linkColor
+
+.subdued
+  color: $subduedTextColor
+
 // GLOBAL.
 
 // Header.
@@ -51,24 +68,36 @@ $headerHeight: 50px
 
 .header__text
   display: inline-block
-  color: #616472
+  color: $textColor
   font-size: 16px
+
+.controls--top-right
+  @include clearfix()
+  color: $textColor
+  position: fixed
+  z-index: 30
+  top: 15px
+  right: 20px
+
+.controls__item
+  display: inline-block
+  vertical-align: middle
+  margin-bottom: 0
+  margin-left: 10px
 
 .back-button,
 .settings-button,
 .close-button
-  color: #a6abb1
+  color: $textColor
   font-size: 22px
-  opacity: .25
   cursor: pointer
   &:hover
-    opacity: 1
+    color: $linkColor
 
 .back-button
   margin-right: 6px
   vertical-align: middle
 
-.settings-button,
 .close-button
   position: fixed
   z-index: 30
@@ -111,7 +140,7 @@ $headerHeight: 50px
     color: white
     @include background-image(linear-gradient(rgba(white, .05), rgba(white, 0)))
     @include box-shadow(rgba(black, .2) 0 1px 2px)
-    background-color: #0894c1
+    background-color: $linkColor
 
 .home__notes-list__row__color
   display: inline-block

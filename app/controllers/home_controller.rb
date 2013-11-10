@@ -3,7 +3,10 @@ require 'sentence'
 class HomeController < ApplicationController
   def index
 
-    @notes = current_user.note_receiveds.desc(:time_created)
+    @notes = []
+    if current_user
+      @notes = current_user.note_receiveds.desc(:time_created)
+    end
     @user = current_user
     @home_json = {
       :user => current_user
@@ -25,8 +28,8 @@ class HomeController < ApplicationController
         #                 :height => 32})
     end
     respond_to do |format|
-        format.html # new.html.erb
-        format.json { render json: @notes }
+      format.html # new.html.erb
+      format.json { render json: @notes }
     end
  end
 

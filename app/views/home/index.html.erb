@@ -14,32 +14,54 @@
 
   </div>
 
-  <i
-    class="fa fa-gear settings-button"
+  <div class="controls--top-right">
+    <% if user_signed_in? %>
+      <p class="controls__item subdued"><%= current_user.email %></p>
+      <p class="controls__item"><%= link_to "Sign out", destroy_user_session_url, :method => :delete %></p>
+    <% end %>
+    <i
+    class="fa fa-gear controls__item settings-button"
     ng-click="goToSettings()"
-  ></i>
+    ></i>
+  </div>
+ 
 
   <div class="content">
-  <% @notes.each do |note| %>
-    <div class="home__notes-list__row">
 
-      <div
-        class="home__notes-list__row__column--thanks-in"
-        ng-click="goToNote('<%= note._id %>')"
-      >
-        <span class="home__notes-list__row__color" style="background-color:{{colors[<%= note.notecollection.notes_count %>]}}"></span>
-        <p class="home__notes-list__row__thanks-in"><%= note.content %>
+    <% if user_signed_in? %>
+      
+      
+      
+      <% @notes.each do |note| %>
+      <div class="home__notes-list__row">
+
+        <div
+          class="home__notes-list__row__column--thanks-in"
+          ng-click="goToNote('<%= note._id %>')"
+        >
+          <span class="home__notes-list__row__color" style="background-color:{{colors[<%= note.notecollection.notes_count %>]}}"></span>
+          <p class="home__notes-list__row__thanks-in"><%= note.content %>
+        </div>
+
+        <div
+          class="home__notes-list__row__column--thanks-out"
+          ng-click="goToNote('<%= note._id %>')"
+        >
+          <span class="home__notes-list__row__color"></span>
+          <p class="home__notes-list__row__thanks-out"><%= note.content %></p>
+        </div>
+
       </div>
 
-      <div
-        class="home__notes-list__row__column--thanks-out"
-        ng-click="goToNote('<%= note._id %>')"
-      >
-        <span class="home__notes-list__row__color"></span>
-        <p class="home__notes-list__row__thanks-out"><%= note.content %></p>
-      </div>
+    <% end %>
 
-    </div>
-  <% end %>
+    <% else %>
+      
+      <p>Sign in or sign up</p>
+      <p><%= link_to "Register", new_user_registration_path %></p>
+      <p><%= link_to "Login", new_user_session_path %></p>
+
+    <% end %>
+
   </div>
 </div>
