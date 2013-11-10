@@ -41,7 +41,7 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @notecollection = Notecollection.new()
-    @note = Note.new(params[:note].merge({:notecollection_id => @notecollection._id}))
+    @note = Note.new(params[:note].merge({:notecollection_id => @notecollection._id, :note_index => 0}))
     @notecollection.notes_list[0] = @note._id.to_s
     @note.user_giver = current_user
 
@@ -137,6 +137,7 @@ class NotesController < ApplicationController
     @notecollection = Notecollection.find(@notecollection_id)
     @notecollection.notes_list << @note._id.to_s
     @notecollection.save
+    @note.note_index = @notes_collection.notes_list.size
     @note.user_giver = current_user
 
     case params[:note][:find_type]

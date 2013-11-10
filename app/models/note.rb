@@ -40,6 +40,7 @@ class Note
   # properties
 
   field :content,                 :type => String, :default => ""
+  field :note_index,              :type => Integer, :default => 0
 
   field :is_private_name_giver,      :type => Boolean, :default => false
   field :is_private_content_giver,   :type => Boolean, :default => false
@@ -64,8 +65,11 @@ class Note
   field :gmaps,                   :type => Boolean
 
   attr_accessor :email, :phone_number, :displayname, :user_code, :find_type
-
+  
   # field :expiration_time, :type => Time, :default => Time.now +1.day
+
+  def next_note
+  end
 
   def gmaps4rails_address
     #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
