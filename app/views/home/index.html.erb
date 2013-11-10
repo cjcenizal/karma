@@ -1,17 +1,25 @@
-<div ng-controller="HomeController">
+<div
+  ng-controller="HomeController"
+  data-home-json="<%= @home_json %>"
+>
   <div class="header">
     
     <div class="home__column">
-      <h2 class="header__text">THANK YOU</h2>
+      <h2 class="header__text"><%= @user.email.upcase %>'S THREDS</h2>
     </div>
 
     <div class="home__column">
-      <h2 class="header__text">...AND ONWARD</h2>
+      <h2 class="header__text">THREDDING</h2>
     </div>
 
   </div>
 
-  <div class="home__notes-list">
+  <i
+    class="fa fa-gear settings-button"
+    ng-click="goToSettings()"
+  ></i>
+
+  <div class="content">
   <% @notes.each do |note| %>
     <div class="home__notes-list__row">
 

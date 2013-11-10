@@ -3,68 +3,77 @@
   class="note"
   data-notes-json="<%= @notes_json %>"
 >
+  <div class="header">
+    
+    <div class="home__column">
+      <h2 class="header__text">THRED</h2>
+    </div>
 
-  <div
-    tf-map
-    tf-map-lat=""
-    class="note__map"
-  >
   </div>
 
   <i
     class="fa fa-times close-button"
     ng-click="goToHome()"
   ></i>
-
-  <div class="note__main">
-
-    <p id="notice"><%= notice %></p>
-
-    <div class="note__content">
-      <div
-        class="note__content__item"
-        ng-show="!state.isSendForm"
-      >
-        What the
-      </div>
-      <div
-        class="note__content__send-form"
-        ng-show="state.isSendForm"
-      >
-        <button
-          ng-click="sendNote()"
-        >
-          Send thanks
-        </button>
-      </div>
+    
+  <div class="content">
+    <div
+      tf-map
+      tf-map-lat=""
+      class="note__map"
+    >
     </div>
 
-    <div class="note__nav">
+    <div class="note__main">
 
-      <button
-        class="note__nav__button--previous"
-        ng-class="state.hasPreviousNote | false: 'note__nav__button--disabled'"
-        ng-click="showPreviousNote()"
-      >
-        <i class="fa fa-caret-left note__nav__button__arrow--previous"></i>
-        <div class="note__nav__button__line"></div>
-      </button>
+      <p id="notice"><%= notice %></p>
 
-      <div class="note__nav__title">
-        <p>Matt thanked you</p>
-        <p><i>{{currentNote.created_at | date:'longDate'}}</i></p>
+      <div class="note__content">
+        <div
+          class="note__content__item"
+          ng-show="!state.isSendForm"
+        >
+          What the
+        </div>
+        <div
+          class="note__content__send-form"
+          ng-show="state.isSendForm"
+        >
+          <button
+            ng-click="sendNote()"
+          >
+            Send thanks
+          </button>
+        </div>
       </div>
 
-      <button
-        class="note__nav__button--next"
-        ng-class="state.hasNextNote || state.isNextNoteTheSendForm | false: 'note__nav__button--disabled'"
-        ng-click="showNextNote()"
-      >
-        <i class="fa fa-caret-right note__nav__button__arrow--next"></i>
-        <div class="note__nav__button__line"></div>
-      </button>
+      <div class="note__nav">
+
+        <button
+          class="note__nav__button--previous"
+          ng-class="state.hasPreviousNote | false: 'note__nav__button--disabled'"
+          ng-click="showPreviousNote()"
+        >
+          <i class="fa fa-caret-left note__nav__button__arrow--previous"></i>
+          <div class="note__nav__button__line"></div>
+        </button>
+
+        <div class="note__nav__title">
+          <p>Matt thanked you</p>
+          <p><i>{{currentNote.created_at | date:'longDate'}}</i></p>
+        </div>
+
+        <button
+          class="note__nav__button--next"
+          ng-class="state.hasNextNote || state.isNextNoteTheSendForm | false: 'note__nav__button--disabled'"
+          ng-click="showNextNote()"
+        >
+          <i class="fa fa-caret-right note__nav__button__arrow--next"></i>
+          <div class="note__nav__button__line"></div>
+        </button>
+      </div>
+
     </div>
 
   </div>
-
 </div>

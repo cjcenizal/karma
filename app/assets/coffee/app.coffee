@@ -21,12 +21,17 @@ TF.controller "HomeController", [
   "$scope"
   "$location"
   "$window"
+  "$attrs"
   (
     $http
     $scope
     $location
     $window
+    $attrs
   ) ->
+
+    payload = JSON.parse $attrs.homeJson
+    user    = payload.user
 
     COLORS =
       PURPLE:  "#8857f9"
@@ -51,8 +56,32 @@ TF.controller "HomeController", [
       COLORS.BLUE
     ]
 
-    $scope.goToNote = (noteId) ->\
+    $scope.goToNote = (noteId) ->
       $window.location = "/note/#{noteId}"
+
+    $scope.goToSettings = ->
+      $window.location = "/users/#{user._id}/edit"
+
+]
+
+# SETTINGS CONTROLLER.
+
+TF.controller "SettingsController", [
+  "$http"
+  "$scope"
+  "$location"
+  "$window"
+  "$attrs"
+  (
+    $http
+    $scope
+    $location
+    $window
+    $attrs
+  ) ->
+
+    $scope.goToHome = ->
+      $window.location = "/"
 
 ]
 
@@ -92,7 +121,7 @@ TF.controller "NoteController", [
       hasPreviousNote:       false
       hasNextNote:           false
       isNextNoteTheSendForm: false
-      isSendForm:            false
+      showSendForm:            false
       isSendingNote:         false
       isSendNoteSuccess:     false
       isSendNoteError:       false
@@ -102,7 +131,7 @@ TF.controller "NoteController", [
     # View API.
 
     $scope.showPreviousNote = ->
-      if $scope.state.isSendForm
+      if $scope.state.showSendForm
         hideSendForm()
       else
         showNoteAtIndex $scope.currentNote.note_index - 1
@@ -145,12 +174,12 @@ TF.controller "NoteController", [
 
     hideSendForm = ->
       console.log "hide send"
-      $scope.state.isSendForm = false
+      $scope.state.showSendForm = false
       updateButtonStates()
 
     showSendForm = ->
       console.log "show send"
-      $scope.state.isSendForm = true
+      $scope.state.showSendForm = true
       updateButtonStates()
 
     updateButtonStates = ->
@@ -158,7 +187,7 @@ TF.controller "NoteController", [
       $scope.state.hasNextNote = getNoteAtIndex $scope.currentNote.note_index + 1
       $scope.state.isNextNoteTheSendForm =
         not $scope.state.hasNextNote and
-        not $scope.state.isSendForm and
+        not $scope.state.showSendForm and
         $scope.currentNote.user_receiver_id is user._id
     
     getNoteAtIndex = (index) ->

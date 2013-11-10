@@ -1,6 +1,26 @@
-<h1>Editing user</h1>
+<div
+  ng-controller="SettingsController"
+>
+  
+  <div class="header">
+    
+    <div class="home__column">
+      <h2 class="header__text">SETTINGS</h2>
+    </div>
 
-<%= render 'form' %>
+  </div>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+  <i
+    class="fa fa-times close-button"
+    ng-click="goToHome()"
+  ></i>
+
+  <div class="content">
+    <h1>Editing user</h1>
+    Hi
+    <%= render 'form' %>
+
+    <%= link_to 'Show', @user %> |
+    <%= link_to 'Back', users_path %>
+  </div>
+</div>
