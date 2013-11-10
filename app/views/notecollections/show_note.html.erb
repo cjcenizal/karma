@@ -30,18 +30,18 @@
       <div class="note__content">
         <div
           class="note__content__item"
-          ng-show="!state.isSendForm"
+          ng-show="!state.showSendForm"
         >
           What the
         </div>
         <div
           class="note__content__send-form"
-          ng-show="state.isSendForm"
+          ng-show="state.showSendForm"
         >
           <button
             ng-click="sendNote()"
           >
-            Send thanks
+            Thred someone in
           </button>
         </div>
       </div>
@@ -58,7 +58,7 @@
         </button>
 
         <div class="note__nav__title">
-          <p>Matt thanked you</p>
+          <p>Matt thredded you in</p>
           <p><i>{{currentNote.created_at | date:'longDate'}}</i></p>
         </div>
 
