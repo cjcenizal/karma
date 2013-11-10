@@ -19,3 +19,5 @@
 
 # Fuck you, windows.
 *.DS_Store
+
+*.sass-cache*
