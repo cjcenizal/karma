@@ -1,11 +1,11 @@
 require 'capistrano-unicorn'
 
-set :application, "shoutapp"
+set :application, "karma"
 
 set :user, "ubuntu"
 
 set :scm, :git
-set :repository, "git@bitbucket.org:whitecratedog/shout.git"
+set :repository, "git@github.com:whitecratedog/shout.git"
 set :scm_passphrase, ""
 set :branch, "master"
 set :deploy_via, :copy
@@ -15,8 +15,8 @@ set :normalize_asset_timestamps, false
 set :use_sudo, false
 set :rails_env,       "production"
 
-server "ec2-54-215-188-201.us-west-1.compute.amazonaws.com", :web, :app, :db, primary: true
-ssh_options[:keys] = ["./.ec2/shoutappkey.pem"]
+server "ec2-50-18-97-19.us-west-1.compute.amazonaws.com", :web, :app, :db, primary: true
+ssh_options[:keys] = ["./.ec2/karma.pem"]
 
 set :deploy_to, "/home/ubuntu/apps/#{application}"
 
@@ -35,8 +35,8 @@ namespace :deploy do
  end  
 
   task :restart, roles: :app do
-    sudo "/etc/init.d/unicorn_shoutapp stop"
-    sudo "/etc/init.d/unicorn_shoutapp start"
+    sudo "/etc/init.d/unicorn_karma stop"
+    sudo "/etc/init.d/unicorn_karma start"
   end  
 
   
