@@ -1,3 +1,5 @@
+@import "compass"
+@import "compass/css3/user-interface"
 
 // Mixins.
 
@@ -47,9 +49,24 @@ $headerHeight: 50px
   background-color: #25272c
   z-index: 15
 
-.header__text 
+.header__text
+  display: inline-block
   color: #616472
   font-size: 16px
+
+.back-button,
+.settings-button,
+.close-button
+  color: #a6abb1
+  font-size: 22px
+  opacity: .25
+  cursor: pointer
+  &:hover
+    opacity: 1
+
+.back-button
+  margin-right: 6px
+  vertical-align: middle
 
 .settings-button,
 .close-button
@@ -57,12 +74,6 @@ $headerHeight: 50px
   z-index: 30
   top: 15px
   right: 20px
-  color: #a6abb1
-  font-size: 22px
-  opacity: .25
-  cursor: pointer
-  &:hover
-    opacity: 1
 
 .content
   position: fixed
@@ -97,7 +108,10 @@ $headerHeight: 50px
   @extend .home__notes-list__row__column
   cursor: pointer
   &:hover
-    background-color: rgba(white, .05)
+    color: white
+    @include background-image(linear-gradient(rgba(white, .05), rgba(white, 0)))
+    @include box-shadow(rgba(black, .2) 0 1px 2px)
+    background-color: #0894c1
 
 .home__notes-list__row__color
   display: inline-block
@@ -118,7 +132,7 @@ $headerHeight: 50px
 
 .note__map,
 .note__main
-  position: fixed !important
+  position: absolute !important
   top: 0
   bottom: 0
   left: 0
