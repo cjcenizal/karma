@@ -56,6 +56,15 @@ TF.controller "HomeController", [
       COLORS.BLUE
     ]
 
+    $scope.signOut = (url) ->
+      $http
+        method: "DELETE"
+        url: url
+      .success (data, status, headers, config) ->
+        $window.location = "/"
+      , (data, status, headers, config) ->
+        console.error "sign out error", data, status, headers, config
+
     $scope.goToNote = (noteId) ->
       $window.location = "/note/#{noteId}"
 

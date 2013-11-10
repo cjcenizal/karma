@@ -3,9 +3,13 @@ Karma::Application.routes.draw do
 
   resources :notes
   resources :notecollections
+  
+  devise_scope :user do
+    delete 'users/sign_out' => 'session#destroy', :as => 'user_sign_out'
+  end
 
   devise_for :users,  :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
-
+  
   post 'notes/new/collection/:collection_id' => 'notes#pass', :as => 'collection_pass'
   get 'notes/new/collection/:collection_id' => 'notes#pass_new', :as => 'collection_pass_new'
   match 'tag/:hashtag', :to => "home#tag_search"
