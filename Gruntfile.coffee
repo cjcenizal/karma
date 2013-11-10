@@ -71,6 +71,7 @@ module.exports = (grunt) ->
           "public/javascripts/application.js": [
             "vendor/js/jquery-2.0.3.min.js"
             "vendor/js/angular.min.js"
+            "vendor/js/underscore-min.js"
             "tmp/coffee.js"
             #"tmp/templates.js"
           ]
@@ -81,6 +82,7 @@ module.exports = (grunt) ->
         src: [
           "vendor/js/jquery-2.0.3.js"
           "vendor/js/angular.js"
+          "vendor/js/underscore.js"
           "tmp/coffee.js"
           #"tmp/templates.js"
         ]

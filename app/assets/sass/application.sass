@@ -135,6 +135,12 @@ button.note__nav__button
   &:hover
     opacity: 1
 
+  &.note__nav__button--disabled
+    pointer-events: none
+    opacity: 0
+    &:hover
+      opacity: 0
+
 button.note__nav__button--previous
   @extend button.note__nav__button
   left: 0

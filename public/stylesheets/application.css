@@ -67,24 +67,28 @@ h2 { font-size: 16px; }
 button.note__nav__button, button.note__nav__button--previous, button.note__nav__button--next { background-color: transparent; border: none; position: absolute; bottom: 0; padding: 0; height: 80px; color: #a6abb1; font-size: 14px; opacity: 0.25; cursor: pointer; }
 /* line 135, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
 button.note__nav__button:hover, button.note__nav__button--previous:hover, button.note__nav__button--next:hover { opacity: 1; }
-
 /* line 138, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
-button.note__nav__button--previous { left: 0; right: 50%; margin: 0 130px 0 30px; }
+button.note__nav__button.note__nav__button--disabled, button.note__nav__button--disabled.note__nav__button--previous, button.note__nav__button--disabled.note__nav__button--next { pointer-events: none; opacity: 0; }
+/* line 141, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+button.note__nav__button.note__nav__button--disabled:hover, button.note__nav__button--disabled.note__nav__button--previous:hover, button.note__nav__button--disabled.note__nav__button--next:hover { opacity: 0; }
 
 /* line 144, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
-button.note__nav__button--next { left: 50%; right: 0; margin: 0 30px 0 130px; }
+button.note__nav__button--previous { left: 0; right: 50%; margin: 0 130px 0 30px; }
 
 /* line 150, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
-.note__nav__button__arrow, .note__nav__button__arrow--previous, .note__nav__button__arrow--next { position: absolute; margin-top: -8px; font-size: 18px; top: 50%; }
+button.note__nav__button--next { left: 50%; right: 0; margin: 0 30px 0 130px; }
 
 /* line 156, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+.note__nav__button__arrow, .note__nav__button__arrow--previous, .note__nav__button__arrow--next { position: absolute; margin-top: -8px; font-size: 18px; top: 50%; }
+
+/* line 162, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
 .note__nav__button__arrow--previous { left: 0; }
 
-/* line 160, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+/* line 166, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
 .note__nav__button__arrow--next { right: -6px; }
 
-/* line 164, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+/* line 170, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
 .note__nav__button__line { position: absolute; top: 50%; width: 100%; height: 1px; background-color: #a6abb1; }
 
-/* line 172, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
+/* line 178, /Users/cjcenizal/Documents/Work/GitHub/karma/app/assets/sass/application.sass */
 .note__nav__title { position: absolute; width: 160px; height: 80px; bottom: 0; left: 50%; margin-left: -80px; color: #a6abb1; text-align: center; }
