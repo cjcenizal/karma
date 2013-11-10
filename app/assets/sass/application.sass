@@ -17,6 +17,7 @@ html, body
   background-color: #383a42
   margin: 0
   padding: 0
+  height: 100%
 
 // Type.
 
@@ -47,7 +48,7 @@ $headerHeight: 50px
   color: #616472
   font-size: 16px
 
-// Home.
+// HOME PAGE.
 
 .home__column
   float:   left
@@ -92,3 +93,88 @@ $headerHeight: 50px
   display: inline-block
   vertical-align: middle
   margin-bottom: 0
+
+// NOTE PAGE.
+
+.note
+  height: 100%
+
+.note__map,
+.note__main
+  position: fixed !important
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
+.note__map
+  opacity: .1
+  z-index: 10
+
+.note__main
+  z-index: 20
+
+.note__nav
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  height: 120px
+
+button.note__nav__button
+  background-color: transparent
+  border: none
+  position: absolute
+  bottom: 0
+  padding: 0
+  height: 80px
+  color: #a6abb1
+  font-size: 14px
+  opacity: .25
+  cursor: pointer
+  &:hover
+    opacity: 1
+
+button.note__nav__button--previous
+  @extend button.note__nav__button
+  left: 0
+  right: 50%
+  margin: 0 130px 0 30px
+
+button.note__nav__button--next
+  @extend button.note__nav__button
+  left: 50%
+  right: 0
+  margin: 0 30px 0 130px
+
+.note__nav__button__arrow
+  position: absolute
+  margin-top: -8px
+  font-size: 18px
+  top: 50%
+
+.note__nav__button__arrow--previous
+  @extend .note__nav__button__arrow
+  left: 0
+
+.note__nav__button__arrow--next
+  @extend .note__nav__button__arrow
+  right: -6px
+
+.note__nav__button__line
+  position: absolute
+  top: 50%
+  width: 100%
+  height: 1px
+  background-color: #a6abb1
+
+$titleWidth: 160px
+.note__nav__title
+  position: absolute
+  width: $titleWidth
+  height: 80px
+  bottom: 0
+  left: 50%
+  margin-left: -$titleWidth * .5
+  color: #a6abb1
+  text-align: center

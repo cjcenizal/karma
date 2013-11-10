@@ -1,6 +1,6 @@
 window.TF = TF = angular.module "TF", []
 
-# HOME.
+# HOME CONTROLLER.
 
 TF.controller "HomeController", [
   "$http"
@@ -42,3 +42,32 @@ TF.controller "HomeController", [
 
 ]
 
+# NOTE CONTROLLER.
+
+TF.controller "NoteController", [
+  "$scope"
+  (
+    $scope
+  ) ->
+    
+]
+
+# MAP DIRECTIVE.
+
+TF.directive "tfMap", [
+  "$timeout"
+  ($timeout) ->
+
+    link: (scope, element, attrs) ->
+      
+      mapOptions =
+        center: new google.maps.LatLng -34.397, 150.644
+        zoom: 8
+        disableDefaultUI: true
+        scrollwheel: false
+        draggable: false
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+
+      map = new google.maps.Map element[0], mapOptions
+
+]
