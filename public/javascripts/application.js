@@ -30184,8 +30184,10 @@ var styleDirective = valueFn({
   });
 
   TF.controller("HomeController", [
-    "$http", "$scope", "$location", "$window", function($http, $scope, $location, $window) {
-      var COLORS;
+    "$http", "$scope", "$location", "$window", "$attrs", function($http, $scope, $location, $window, $attrs) {
+      var COLORS, payload, user;
+      payload = JSON.parse($attrs.homeJson);
+      user = payload.user;
       COLORS = {
         PURPLE: "#8857f9",
         VIOLET: "#b439b9",
@@ -30198,8 +30200,19 @@ var styleDirective = valueFn({
         BLUE: "#448df9"
       };
       $scope.colors = [COLORS.PURPLE, COLORS.VIOLET, COLORS.MAGENTA, COLORS.ORANGE, COLORS.GOLD, COLORS.GREEN, COLORS.TEAL, COLORS.CYAN, COLORS.BLUE];
-      return $scope.goToNote = function(noteId) {
+      $scope.goToNote = function(noteId) {
         return $window.location = "/note/" + noteId;
+      };
+      return $scope.goToSettings = function() {
+        return $window.location = "/users/" + user._id + "/edit";
+      };
+    }
+  ]);
+
+  TF.controller("SettingsController", [
+    "$http", "$scope", "$location", "$window", "$attrs", function($http, $scope, $location, $window, $attrs) {
+      return $scope.goToHome = function() {
+        return $window.location = "/";
       };
     }
   ]);
@@ -30223,14 +30236,14 @@ var styleDirective = valueFn({
         hasPreviousNote: false,
         hasNextNote: false,
         isNextNoteTheSendForm: false,
-        isSendForm: false,
+        showSendForm: false,
         isSendingNote: false,
         isSendNoteSuccess: false,
         isSendNoteError: false
       };
       $scope.currentNote = null;
       $scope.showPreviousNote = function() {
-        if ($scope.state.isSendForm) {
+        if ($scope.state.showSendForm) {
           return hideSendForm();
         } else {
           return showNoteAtIndex($scope.currentNote.note_index - 1);
@@ -30277,18 +30290,18 @@ var styleDirective = valueFn({
       };
       hideSendForm = function() {
         console.log("hide send");
-        $scope.state.isSendForm = false;
+        $scope.state.showSendForm = false;
         return updateButtonStates();
       };
       showSendForm = function() {
         console.log("show send");
-        $scope.state.isSendForm = true;
+        $scope.state.showSendForm = true;
         return updateButtonStates();
       };
       updateButtonStates = function() {
         $scope.state.hasPreviousNote = getNoteAtIndex($scope.currentNote.note_index - 1);
         $scope.state.hasNextNote = getNoteAtIndex($scope.currentNote.note_index + 1);
-        return $scope.state.isNextNoteTheSendForm = !$scope.state.hasNextNote && !$scope.state.isSendForm && $scope.currentNote.user_receiver_id === user._id;
+        return $scope.state.isNextNoteTheSendForm = !$scope.state.hasNextNote && !$scope.state.showSendForm && $scope.currentNote.user_receiver_id === user._id;
       };
       getNoteAtIndex = function(index) {
         return notes[index];

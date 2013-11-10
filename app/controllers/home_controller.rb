@@ -4,6 +4,10 @@ class HomeController < ApplicationController
   def index
 
     @notes = current_user.note_receiveds.desc(:time_created)
+    @user = current_user
+    @home_json = {
+      :user => current_user
+    }.to_json
     respond_to do |format|
       format.html # new.html.erb
     end

@@ -31,6 +31,8 @@ p
 h2 
   font-size: 16px
 
+// GLOBAL.
+
 // Header.
 
 $headerHeight: 50px
@@ -43,17 +45,17 @@ $headerHeight: 50px
   right: 0
   height: $headerHeight
   background-color: #25272c
+  z-index: 15
 
 .header__text 
   color: #616472
   font-size: 16px
 
-// GLOBAL.
-
+.settings-button,
 .close-button
   position: fixed
   z-index: 30
-  top: 20px
+  top: 15px
   right: 20px
   color: #a6abb1
   font-size: 22px
@@ -62,20 +64,21 @@ $headerHeight: 50px
   &:hover
     opacity: 1
 
-// HOME PAGE.
-
-.home__column
-  float:   left
-  width:   50%
-  padding: 16px
-
-.home__notes-list
+.content
   position: fixed
   top: $headerHeight
   bottom: 0
   left: 0
   right: 0
   overflow-y: scroll
+  z-index: 15
+
+// HOME PAGE.
+
+.home__column
+  float:   left
+  width:   50%
+  padding: 16px
 
 .home__notes-list__row
   @include clearfix()
