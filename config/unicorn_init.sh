@@ -4,8 +4,8 @@ set -e
 
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
-APP_ROOT=/home/ubuntu/apps/shoutapp/current
-PID=/home/ubuntu/apps/shoutapp/shared/pids/unicorn.pid
+APP_ROOT=/home/ubuntu/apps/karma/current
+PID=/home/ubuntu/apps/karma/shared/pids/unicorn.pid
 CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
 AS_USER=ubuntu
 set -u

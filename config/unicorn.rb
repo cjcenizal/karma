@@ -21,12 +21,12 @@ worker_processes 4
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
-working_directory "/home/ubuntu/apps/shoutapp/current" # available in 0.94.0+
+working_directory "/home/ubuntu/apps/karma/current" # available in 0.94.0+
 #user "nobody", "nogroup"
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
-listen "/home/ubuntu/apps/shoutapp/shared/pids/.sock", :backlog => 64
+listen "/home/ubuntu/apps/karma/shared/pids/.sock", :backlog => 64
 
 preload_app true
 
@@ -34,13 +34,13 @@ preload_app true
 timeout 30
 
 # feel free to point this anywhere accessible on the filesystem
-pid "/home/ubuntu/apps/shoutapp/shared/pids/unicorn.pid"
+pid "/home/ubuntu/apps/karma/shared/pids/unicorn.pid"
 
 # By default, the Unicorn logger will write to stderr.
 # Additionally, ome applications/frameworks log to stderr or stdout,
 # so prevent them from going to /dev/null when daemonized here:
-stderr_path "/home/ubuntu/apps/shoutapp/shared/log/unicorn.stderr.log"
-stdout_path "/home/ubuntu/apps/shoutapp/shared/log/unicorn.stdout.log"
+stderr_path "/home/ubuntu/apps/karma/shared/log/unicorn.stderr.log"
+stdout_path "/home/ubuntu/apps/karma/shared/log/unicorn.stdout.log"
 
 before_fork do |server, worker|
 # This option works in together with preload_app true setting
