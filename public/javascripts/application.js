@@ -30200,6 +30200,16 @@ var styleDirective = valueFn({
         BLUE: "#448df9"
       };
       $scope.colors = [COLORS.PURPLE, COLORS.VIOLET, COLORS.MAGENTA, COLORS.ORANGE, COLORS.GOLD, COLORS.GREEN, COLORS.TEAL, COLORS.CYAN, COLORS.BLUE];
+      $scope.signOut = function(url) {
+        return $http({
+          method: "DELETE",
+          url: url
+        }).success(function(data, status, headers, config) {
+          return $window.location = "/";
+        }, function(data, status, headers, config) {
+          return console.error("sign out error", data, status, headers, config);
+        });
+      };
       $scope.goToNote = function(noteId) {
         return $window.location = "/note/" + noteId;
       };
