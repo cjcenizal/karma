@@ -22,6 +22,26 @@ class NotecollectionsController < ApplicationController
     end
   end
 
+  def show_note
+    @notecollection = Notecollection.find(params[:collection_id])
+    @note = Note.find(params[:note_id])
+    @all_notes = @notecollection.notes.desc(:time_created)
+
+
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render  :status => 200,
+                            :json => { :success => true,
+                            :info => "Collection pulled succesfully.",
+                            :data => {  :collection => @notecollection,
+                                        :config => {:default_note_id => @note._id, :default_note_index => @note.note_index},
+                                        :notes => @all_notes} }}
+
+
+
+    end
+  end
   # GET /notecollections/new
   # GET /notecollections/new.json
   def new
