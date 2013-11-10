@@ -1,5 +1,19 @@
 window.TF = TF = angular.module "TF", []
 
+# FILTERS.
+
+TF.filter "true", ->
+  return (boolean, value) ->
+    if boolean
+      return value
+    return ""
+
+TF.filter "false", ->
+  return (boolean, value) ->
+    if !boolean
+      return value
+    return ""
+
 # HOME CONTROLLER.
 
 TF.controller "HomeController", [
@@ -46,10 +60,76 @@ TF.controller "HomeController", [
 
 TF.controller "NoteController", [
   "$scope"
+  "$attrs"
   (
     $scope
+    $attrs
   ) ->
+
+    payload    = JSON.parse $attrs.notesJson
+    notes      = payload.notes
+    collection = payload.collection
+    config     = payload.config
+    user       = payload.user
+
+    # TEST DATA.
+    notes.push _.clone(notes[0])
+    notes[1].note_index = 1
+    notes.push _.clone(notes[0])
+    notes[2].note_index = 2
+
+    console.log notes
+
+    $scope.state =
+      hasPreviousNote: false
+      hasNextNote: false
+      isNextNoteTheSendForm: false
+      isSendForm: false
+
+    $scope.currentNote = null
+
+    $scope.showPreviousNote = ->
+      if $scope.state.isSendForm
+        hideSendForm()
+      else
+        showNoteAtIndex $scope.currentNote.note_index - 1
+
+    $scope.showNextNote = ->
+      if $scope.state.isNextNoteTheSendForm
+        showSendForm()
+      else
+        showNoteAtIndex $scope.currentNote.note_index + 1
+
+    showNoteAtIndex = (index) ->
+      if getNoteAtIndex index
+        $scope.currentNote = getNoteAtIndex index
+        console.log "assign note", index, $scope.currentNote
+        updateButtonStates()
+
+    hideSendForm = ->
+      console.log "hide send"
+      $scope.state.isSendForm = false
+      updateButtonStates()
+
+    showSendForm = ->
+      console.log "show send"
+      $scope.state.isSendForm = true
+      updateButtonStates()
+
+    updateButtonStates = ->
+      $scope.state.hasPreviousNote = getNoteAtIndex $scope.currentNote.note_index - 1
+      $scope.state.hasNextNote = getNoteAtIndex $scope.currentNote.note_index + 1
+      $scope.state.isNextNoteTheSendForm =
+        not $scope.state.hasNextNote and
+        not $scope.state.isSendForm and
+        $scope.currentNote.user_receiver_id is user._id
     
+    getNoteAtIndex = (index) ->
+      return notes[index]
+
+    # Init.
+    showNoteAtIndex config.default_note_index
+
 ]
 
 # MAP DIRECTIVE.

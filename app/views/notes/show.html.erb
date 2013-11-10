@@ -1,4 +1,8 @@
-<div ng-controller="NoteController" class="note">
+<div
+  ng-controller="NoteController"
+  class="note"
+  data-notes="<%=  %>"
+>
 
   <div
     tf-map
@@ -17,7 +21,11 @@
     <%= link_to 'Back', notes_path %>
 
     <div class="note__nav">
-      <button class="note__nav__button--previous">
+
+      <button
+        class="note__nav__button--previous"
+        ng-click="showPreviousNote()"
+      >
         <i class="fa fa-caret-left note__nav__button__arrow--previous"></i>
         <div class="note__nav__button__line"></div>
       </button>
@@ -27,7 +35,10 @@
         <p><i>May 20, 2013</i></p>
       </div>
 
-      <button class="note__nav__button--next">
+      <button
+        class="note__nav__button--next"
+        ng-click="showNextNote()"
+      >
         <i class="fa fa-caret-right note__nav__button__arrow--next"></i>
         <div class="note__nav__button__line"></div>
       </button>

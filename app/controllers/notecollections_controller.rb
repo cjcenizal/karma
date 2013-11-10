@@ -23,12 +23,25 @@ class NotecollectionsController < ApplicationController
   end
 
   def show_note
-    @notecollection = Notecollection.find(params[:collection_id])
     @note = Note.find(params[:note_id])
+    @notecollection = @note.notecollection #Notecollection.find(params[:collection_id])
     @all_notes = @notecollection.notes.desc(:time_created)
 
+    user = User.where(_id: @note.user_receiver_id).first
+    
+    unless user
+      user = Virtualuser.where(_id: @note.user_receiver_id).first
+    end
 
-
+    @notes_json = {
+      :collection => @notecollection,
+      :config => {
+        :default_note_id => @note._id,
+        :default_note_index => @note.note_index
+      },
+      :notes => @all_notes,
+      :user => user
+    }.to_json
     respond_to do |format|
       format.html # show.html.erb
       format.json { render  :status => 200,

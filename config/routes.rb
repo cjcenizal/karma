@@ -9,7 +9,7 @@ Karma::Application.routes.draw do
   post 'notes/new/collection/:collection_id' => 'notes#pass', :as => 'collection_pass'
   get 'notes/new/collection/:collection_id' => 'notes#pass_new', :as => 'collection_pass_new'
   match 'tag/:hashtag', :to => "home#tag_search"
-  get 'collection/:collection_id/note/:note_id' => 'notecollections#show_note', :as => 'collection_show_note'
+  get 'note/:note_id' => 'notecollections#show_note', :as => 'collection_show_note'
   resources :users
 
   root :to => "home#index"
