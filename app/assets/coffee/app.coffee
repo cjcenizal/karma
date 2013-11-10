@@ -52,7 +52,7 @@ TF.controller "HomeController", [
     ]
 
     $scope.goToNote = (noteId) ->\
-      $window.location = "/notes/#{noteId}"
+      $window.location = "/note/#{noteId}"
 
 ]
 
@@ -61,9 +61,15 @@ TF.controller "HomeController", [
 TF.controller "NoteController", [
   "$scope"
   "$attrs"
+  "$http"
+  "$window"
+  "$location"
   (
     $scope
     $attrs
+    $http
+    $window
+    $location
   ) ->
 
     payload    = JSON.parse $attrs.notesJson
@@ -75,18 +81,25 @@ TF.controller "NoteController", [
     # TEST DATA.
     notes.push _.clone(notes[0])
     notes[1].note_index = 1
+    notes[1]._id = "a"
     notes.push _.clone(notes[0])
     notes[2].note_index = 2
+    notes[2]._id = "b"
 
     console.log notes
 
     $scope.state =
-      hasPreviousNote: false
-      hasNextNote: false
+      hasPreviousNote:       false
+      hasNextNote:           false
       isNextNoteTheSendForm: false
-      isSendForm: false
+      isSendForm:            false
+      isSendingNote:         false
+      isSendNoteSuccess:     false
+      isSendNoteError:       false
 
     $scope.currentNote = null
+
+    # View API.
 
     $scope.showPreviousNote = ->
       if $scope.state.isSendForm
@@ -100,11 +113,35 @@ TF.controller "NoteController", [
       else
         showNoteAtIndex $scope.currentNote.note_index + 1
 
+    $scope.sendNote = ->
+      sendData = {}
+      $scope.state.isSendingNote = true
+      $http
+        method: "POST"
+        url:    "/prelaunch_signups"
+        data:   sendData
+      .success (data, status, headers, config) ->
+        $scope.state.isSendingNote    = false
+        $scope.state.isSendNoteSuccess = true
+      , (data, status, headers, config) ->
+        $scope.state.isSendingNote   = false
+        $scope.state.isSendNoteError = true
+
+    $scope.goToHome = ->
+      $window.location = "/"
+
+    # Internal.
+
     showNoteAtIndex = (index) ->
       if getNoteAtIndex index
         $scope.currentNote = getNoteAtIndex index
         console.log "assign note", index, $scope.currentNote
         updateButtonStates()
+        $location.path "/#{$scope.currentNote._id}"
+
+    showNoteWithId = (id) ->
+      note = getNoteWithId id
+      return showNoteAtIndex note?.note_index
 
     hideSendForm = ->
       console.log "hide send"
@@ -127,8 +164,14 @@ TF.controller "NoteController", [
     getNoteAtIndex = (index) ->
       return notes[index]
 
+    getNoteWithId = (id) ->
+      _.find notes, (note) -> note._id is id
+
     # Init.
-    showNoteAtIndex config.default_note_index
+    do ->
+      noteId = $location.path().replace("/", "")
+      return if noteId? and showNoteWithId noteId
+      showNoteAtIndex config.default_note_index
 
 ]
 

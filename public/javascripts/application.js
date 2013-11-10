@@ -30199,14 +30199,14 @@ var styleDirective = valueFn({
       };
       $scope.colors = [COLORS.PURPLE, COLORS.VIOLET, COLORS.MAGENTA, COLORS.ORANGE, COLORS.GOLD, COLORS.GREEN, COLORS.TEAL, COLORS.CYAN, COLORS.BLUE];
       return $scope.goToNote = function(noteId) {
-        return $window.location = "/notes/" + noteId;
+        return $window.location = "/note/" + noteId;
       };
     }
   ]);
 
   TF.controller("NoteController", [
-    "$scope", "$attrs", function($scope, $attrs) {
-      var collection, config, getNoteAtIndex, hideSendForm, notes, payload, showNoteAtIndex, showSendForm, updateButtonStates, user;
+    "$scope", "$attrs", "$http", "$window", "$location", function($scope, $attrs, $http, $window, $location) {
+      var collection, config, getNoteAtIndex, getNoteWithId, hideSendForm, notes, payload, showNoteAtIndex, showNoteWithId, showSendForm, updateButtonStates, user;
       payload = JSON.parse($attrs.notesJson);
       notes = payload.notes;
       collection = payload.collection;
@@ -30214,14 +30214,19 @@ var styleDirective = valueFn({
       user = payload.user;
       notes.push(_.clone(notes[0]));
       notes[1].note_index = 1;
+      notes[1]._id = "a";
       notes.push(_.clone(notes[0]));
       notes[2].note_index = 2;
+      notes[2]._id = "b";
       console.log(notes);
       $scope.state = {
         hasPreviousNote: false,
         hasNextNote: false,
         isNextNoteTheSendForm: false,
-        isSendForm: false
+        isSendForm: false,
+        isSendingNote: false,
+        isSendNoteSuccess: false,
+        isSendNoteError: false
       };
       $scope.currentNote = null;
       $scope.showPreviousNote = function() {
@@ -30238,12 +30243,37 @@ var styleDirective = valueFn({
           return showNoteAtIndex($scope.currentNote.note_index + 1);
         }
       };
+      $scope.sendNote = function() {
+        var sendData;
+        sendData = {};
+        $scope.state.isSendingNote = true;
+        return $http({
+          method: "POST",
+          url: "/prelaunch_signups",
+          data: sendData
+        }).success(function(data, status, headers, config) {
+          $scope.state.isSendingNote = false;
+          return $scope.state.isSendNoteSuccess = true;
+        }, function(data, status, headers, config) {
+          $scope.state.isSendingNote = false;
+          return $scope.state.isSendNoteError = true;
+        });
+      };
+      $scope.goToHome = function() {
+        return $window.location = "/";
+      };
       showNoteAtIndex = function(index) {
         if (getNoteAtIndex(index)) {
           $scope.currentNote = getNoteAtIndex(index);
           console.log("assign note", index, $scope.currentNote);
-          return updateButtonStates();
+          updateButtonStates();
+          return $location.path("/" + $scope.currentNote._id);
         }
+      };
+      showNoteWithId = function(id) {
+        var note;
+        note = getNoteWithId(id);
+        return showNoteAtIndex(note != null ? note.note_index : void 0);
       };
       hideSendForm = function() {
         console.log("hide send");
@@ -30263,7 +30293,19 @@ var styleDirective = valueFn({
       getNoteAtIndex = function(index) {
         return notes[index];
       };
-      return showNoteAtIndex(config.default_note_index);
+      getNoteWithId = function(id) {
+        return _.find(notes, function(note) {
+          return note._id === id;
+        });
+      };
+      return (function() {
+        var noteId;
+        noteId = $location.path().replace("/", "");
+        if ((noteId != null) && showNoteWithId(noteId)) {
+          return;
+        }
+        return showNoteAtIndex(config.default_note_index);
+      })();
     }
   ]);
 

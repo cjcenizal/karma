@@ -11,6 +11,11 @@
   >
   </div>
 
+  <i
+    class="fa fa-times close-button"
+    ng-click="goToHome()"
+  ></i>
+
   <div class="note__main">
 
     <p id="notice"><%= notice %></p>
@@ -26,7 +31,11 @@
         class="note__content__send-form"
         ng-show="state.isSendForm"
       >
-        Send shit
+        <button
+          ng-click="sendNote()"
+        >
+          Send thanks
+        </button>
       </div>
     </div>
 
