@@ -24012,4 +24012,25 @@ angular.element(document).find('head').append('<style type="text/css">@charset "
     }
   ]);
 
+  TF.controller("NoteController", ["$scope", function($scope) {}]);
+
+  TF.directive("tfMap", [
+    "$timeout", function($timeout) {
+      return {
+        link: function(scope, element, attrs) {
+          var map, mapOptions;
+          mapOptions = {
+            center: new google.maps.LatLng(-34.397, 150.644),
+            zoom: 8,
+            disableDefaultUI: true,
+            scrollwheel: false,
+            draggable: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          return map = new google.maps.Map(element[0], mapOptions);
+        }
+      };
+    }
+  ]);
+
 }).call(this);

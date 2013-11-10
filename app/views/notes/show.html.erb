@@ -1,7 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div ng-controller="NoteController" class="note">
 
-<%= @note.user_giver.displayname %> <%= @note.user_receiver.displayname unless @note.user_receiver.nil? %> <%= @note.content %><br/>
-<%= link_to @note.notecollection._id, :controller => "/notecollections", :action => "show", :id => @note.notecollection._id unless @note.notecollection %> 
+  <div
+    tf-map
+    tf-map-lat=""
+    class="note__map"
+  >
+  </div>
 
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+  <div class="note__main">
+    <p id="notice"><%= notice %></p>
+
+    <%= @note.user_giver.displayname %> <%= @note.user_receiver.displayname unless @note.user_receiver.nil? %> <%= @note.content %><br/>
+    <%= link_to @note.notecollection._id, :controller => "/notecollections", :action => "show", :id => @note.notecollection._id unless @note.notecollection %> 
+
+    <%= link_to 'Edit', edit_note_path(@note) %> |
+    <%= link_to 'Back', notes_path %>
+
+    <div class="note__nav">
+      <button class="note__nav__button--previous">
+        <i class="fa fa-caret-left note__nav__button__arrow--previous"></i>
+        <div class="note__nav__button__line"></div>
+      </button>
+
+      <div class="note__nav__title">
+        <p>Matt thanked you</p>
+        <p><i>May 20, 2013</i></p>
+      </div>
+
+      <button class="note__nav__button--next">
+        <i class="fa fa-caret-right note__nav__button__arrow--next"></i>
+        <div class="note__nav__button__line"></div>
+      </button>
+    </div>
+
+  </div>
+
+</div>
