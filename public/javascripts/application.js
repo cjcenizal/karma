@@ -24012,7 +24012,24 @@ angular.element(document).find('head').append('<style type="text/css">@charset "
     }
   ]);
 
-  TF.controller("NoteController", ["$scope", function($scope) {}]);
+  TF.controller("NoteController", [
+    "$scope", "$attrs", function($scope, $attrs) {
+      var currentNoteIndex, notes;
+      notes = $attrs.dataNotes;
+      currentNoteIndex = null;
+      $scope.showPreviousNote = function() {
+        return showNoteAtIndex(currentNoteIndex - 1);
+      };
+      $scope.showNextNote = function() {
+        return showNoteAtIndex(currentNoteIndex + 1);
+      };
+      return currentNoteIndex = function(index) {
+        if (index >= 0 && index < notes.length) {
+          return currentNoteIndex = index;
+        }
+      };
+    }
+  ]);
 
   TF.directive("tfMap", [
     "$timeout", function($timeout) {

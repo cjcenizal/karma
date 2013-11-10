@@ -46,9 +46,26 @@ TF.controller "HomeController", [
 
 TF.controller "NoteController", [
   "$scope"
+  "$attrs"
   (
     $scope
+    $attrs
   ) ->
+
+
+    notes = $attrs.dataNotes
+
+    currentNoteIndex = null
+
+    $scope.showPreviousNote = ->
+      showNoteAtIndex currentNoteIndex - 1
+
+    $scope.showNextNote = ->
+      showNoteAtIndex currentNoteIndex + 1
+
+    currentNoteIndex = (index) ->
+      if index >= 0 and index < notes.length
+        currentNoteIndex = index
     
 ]
 
